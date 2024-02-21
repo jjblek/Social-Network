@@ -1,0 +1,54 @@
+# .gitignore
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+*.x
+
+# ignore ALL .log files
+*.log
+
+# ignore ALL .html files
+*.html
+
+# ignore ALL .css files
+*.css
+
+# ignore ALL .js files
+*.js
+
+# ignore directories
+cmake-build-debug/
+.idea/
+
+venv/
+__pycache__/

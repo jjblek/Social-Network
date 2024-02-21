@@ -1,0 +1,52 @@
+CPP=g++
+CFLAGS=-std=c++17
+COMPILE=$(CPP) $(CFLAGS)
+
+RM=rm -f *.o
+
+EXE=SocialNetwork.x
+
+OBJS=main.o SocialNetwork.o User.o
+OBJS+=JSONParser.o JSONToken.o JSONTokenizer.o
+OBJS+=JSONEntitySet.o JSONEntity.o JSONObject.o JSONPair.o
+
+PARSER=JSONParser.hpp JSONTokenizer.hpp JSONToken.hpp
+
+STRUCT=JSONEntitySet.hpp JSONEntity.hpp
+STRUCT+=JSONObject.hpp JSONPair.hpp
+
+# Targets needed to bring the executable up to date
+$(EXE): $(OBJS)
+	$(CPP) -o $@ $(OBJS)
+
+main.o: main.cpp SocialNetwork.hpp User.hpp $(PARSER) $(STRUCT)
+	@echo "Linking..."
+	$(COMPILE) -c main.cpp
+
+SocialNetwork.o: SocialNetwork.cpp SocialNetwork.hpp User.hpp $(PARSER) $(STRUCT)
+	$(COMPILE) -c SocialNetwork.cpp
+
+User.o: User.cpp User.hpp JSONObject.hpp JSONPair.hpp
+	$(COMPILE) -c User.cpp
+
+JSONParser.o: JSONParser.cpp $(PARSER) $(STRUCT)
+	$(COMPILE) -c JSONParser.cpp
+
+JSONTokenizer.o: JSONTokenizer.cpp JSONTokenizer.hpp JSONToken.hpp
+	$(COMPILE) -c JSONTokenizer.cpp
+
+JSONEntitySet.o: JSONEntitySet.cpp $(STRUCT)
+	$(COMPILE) -c JSONEntitySet.cpp
+
+JSONEntity.o: JSONEntity.cpp JSONEntity.hpp JSONObject.hpp JSONPair.hpp
+	$(COMPILE) -c JSONEntity.cpp
+
+JSONObject.o: JSONObject.cpp JSONObject.hpp JSONPair.hpp
+	$(COMPILE) -c JSONObject.cpp
+
+JSONPair.o: JSONPair.cpp JSONPair.hpp
+	$(COMPILE) -c JSONPair.cpp
+
+clean:
+	@echo " Cleaning...";
+	$(RM) $(EXE)
